@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<div align="center">
+		<div th:if="${success}"
+			class="row alert alert-success alert-dismissible">
+			<button type="button" class="close" data-dismiss="alert"
+				aria-label="Close">
+				<span aria-hidden="true">×</span>
+			</button>
+			<span th:text="${success}"></span>
+		</div>
+		<div class="row">
+			<a th:href="@{/new}" class="btn btn-success pull-left">
+				<span class="glyphicon glyphicon-plus"></span> Add new Todo
+			</a>
+			
+		</div>
+		<nav aria-label="Page navigation example">
+		<div class="row">
+				<table border="1" cellpadding="1">
+					<thead>
+						<tr>
+                <th><a href="todo?field=id"></a>STT</th>
+                <th>Work Name</th>
+                <th>Starting Date</th>
+                <th>Ending Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="contact,iterStat : ${listTodos.pageList}">
+							<td th:text="${iterStat.count}"></td>
+							<td th:text="${contact.workname}"></td>
+							<td th:text="${contact.startingdate}"></td>
+							<td th:text="${contact.endingdate}"></td>
+							<td th:text="${contact.status}"></td>
+							<td>
+                	<a th:href="@{'/edit/' + ${contact.id}}">Edit</a>
+                	&nbsp;&nbsp;&nbsp;
+                	<a th:href="@{'/delete/' + ${contact.id}}">Delete</a>
+                </td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		<ul class="pagination">
+			<li
+				th:class="${currentIndex == 1}? 'page-item disabled' : 'page-item'">
+				<a class="page-link" th:href="@{/todo/page/1}">First</a>
+			</li>
+			<li
+				th:class="${currentIndex == 1}? 'page-item disabled': 'page-item' ">
+				<a class="page-link" aria-label="Previous"
+				th:href="@{|${baseUrl}${currentIndex - 1}|}"
+				title='Go to previous page'><span aria-hidden="true">«</span>
+					<span class="sr-only">Previous</span></a>
+			</li>
+			<li th:each="item : ${#numbers.sequence(beginIndex,endIndex)}"
+				th:class="${item == currentIndex ? 'page-item active' :'page-item' }">
+				<a class="page-link" th:href="@{|${baseUrl}${item}|}"> <span
+					th:text='${item}'>1</span>
+			</a>
+			</li>
+			<li
+				th:class="${currentIndex == totalPageCount}? 'page-item disabled': 'page-item'">
+				<a class="page-link" aria-label="Next"
+				th:href="@{|${baseUrl}${currentIndex + 1}|}" title='Go to next page'><span
+					aria-hidden="true">»</span> <span class="sr-only">Next</span></a>
+			</li>
+			<li
+				th:class="${currentIndex == totalPageCount}? 'page-item disabled':'page-item'">
+				<a class="page-link" th:href="@{|${baseUrl}${totalPageCount}|}">Last</a>
+			</li>
+		</ul>
+	</nav>
+	
+			
+		</th:block>
+	</div>
+	<!-- /.container -->
+
+</body>
+</html>

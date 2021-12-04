@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>Edit Todo</title>
+</head>
+<body>
+	<div align="center">
+		<h1>Edit Todo</h1>
+		<br />
+		<form action="#" th:action="@{/save}" th:object="${todo}"
+			method="post">
+
+			<table border="0" cellpadding="10">
+				<tr>				
+					<td>Todo ID:</td>
+					<td>
+						<input type="text" th:field="*{id}" readonly="readonly" />
+					</td>
+				</tr>			
+				<tr>				
+					<td>Work Name:</td>
+					<td>
+						<input type="text" th:field="*{workname}" />
+					</td>
+				</tr>
+				<tr>
+					<td>Starting Date:</td>
+					<td><input type="text" th:field="*{startingdate}" /></td>
+				</tr>
+				<tr>
+					<td>Ending Date:</td>
+					<td><input type="text" th:field="*{endingdate}" /></td>
+				</tr>	<tr>
+					<td>Status:</td>
+					<td><input type="text" th:field="*{status}" /></td>
+				</tr>							
+				<tr>
+					<td colspan="2"><button type="submit">Save</button> </td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>
